@@ -1,7 +1,6 @@
 .PHONY: build
 build: ## Build Docker Image.
 	docker-compose up -d
-# docker network create schemaspy_practiceが事前に必要
 
 .PHONY: stop
 stop: ## stop Docker container.

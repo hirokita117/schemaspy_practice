@@ -8,6 +8,8 @@ schemaspy を扱ってみたかったので作成したリポジトリ。
 
 $ touch hirokita_test_tables/any.sql
 
+$ docker network create schemaspy_practice
+
 $ make build
 
 $ make push
