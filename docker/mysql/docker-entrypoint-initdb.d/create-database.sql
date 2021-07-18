@@ -1,0 +1,1 @@
+CREATE DATABASE `hirokita_test` DEFAULT CHARACTER SET utf8mb4;

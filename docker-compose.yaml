@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  mysql:
+    container_name: hirokita_test_db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: XXXX
+    volumes:
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 127.0.0.1:3306:3306
+    command: mysqld
+    networks:
+      - schemaspy_practice
+  schemaspy:
+    container_name: schemaspy
+    image: schemaspy/schemaspy:snapshot
+    volumes:
+      - ./schemaspy/output:/output
+      - ./schemaspy/schemaspy.properties:/schemaspy.properties
+    depends_on:
+      - mysql
+    # docker-compose upするたびにドキュメント作成されるのが嫌な人は入れる
+    entrypoint: /bin/sh
+    networks:
+      - schemaspy_practice
+  skeema:
+    container_name: skeema
+    build: .
+    networks:
+      - schemaspy_practice
+networks:
+  schemaspy_practice:
+    external: true
